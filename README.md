@@ -14,13 +14,13 @@ The system should also provide facility to change the appointment date/time or c
 
 To provide the above functionality as a standalone application, which have
 
-a. Home Page
+a. Home Page: 
   It should have some generic information about Healthcare, upcoming event(s) or promotion(s) and past achievements; primarily static information. It should also have the login feature.
   
-b. Search page
+b. Search page: 
   To search/select a Healthcare Center and search a doctor based on specialization
   
-c. Doctor details and Available time-slots
+c. Doctor details and Available time-slots: 
   It should show some details about the doctor including experience, qualifications. It should also show the available time slots for next two days, but at the same time there should be a facility to pick a future date/time up to next three months. One can book an appointment from this page and see the confirmation message. Another version of this same page should open, when the user attempts to modify or cancel the appointment. Basic rules (like no cancellation for past date appointments) should be enforced.
   
 d. System should send email (or SMS) notification w.r.t. confirmed appointment(s), along with the
