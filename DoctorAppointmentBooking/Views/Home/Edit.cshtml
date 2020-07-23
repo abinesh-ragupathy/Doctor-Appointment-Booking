@@ -1,0 +1,94 @@
+﻿@model DoctorAppointmentBooking.Models.DoctorAndNetUsers
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<style>
+    body {
+        background-color: aliceblue;
+    }
+</style>*@
+<head>
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+</head>
+<body>
+    <h2 style="font-family:cursive;color:firebrick">Edit Appointment.</h2>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+        <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+        <script type="text/javascript">
+            var date = new Date();
+            var currentMonth = date.getMonth();
+            var currentDate = date.getDate();
+            var currentYear = date.getFullYear();
+
+            $(function () {
+                $(".date-picker").datepicker({
+                    dateFormat: 'mm/dd/yy',
+                    minDate: new Date(currentYear, currentMonth, currentDate),
+                    maxDate: new Date(currentYear, currentMonth + 3, currentDate)
+                });
+            });
+        </script>
+    }
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.AllAppointment.AptId)
+            @Html.HiddenFor(model => model.Doctor.DocId)
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <h4 style="font-family:Arial"><span style="font-family:Bahnschrift;font-size:larger;color:darkslateblue">Doctor Name: </span>
+                    @Html.DisplayFor(model => model.Doctor.DocName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Doctor.DocName, "", new { @class = "text-danger" })
+                    </h4>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <h4 style="font-family:Arial"><span style="font-family:Bahnschrift;font-size:larger;color:darkslateblue">Specialization: </span>
+                    @Html.DisplayFor(model => model.Doctor.DocSpecialization, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Doctor.DocSpecialization, "", new { @class = "text-danger" })
+                    </h4>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <h4 style="font-family:Arial"><span style="font-family:Bahnschrift;font-size:larger;color:darkslateblue">Appointment Date: </span>
+                    @Html.EditorFor(model => model.AllAppointment.SlotDate, new { htmlAttributes = new { @class = "form-control date-picker" } })
+                    @Html.ValidationMessageFor(model => model.AllAppointment.SlotDate, "", new { @class = "text-danger" })
+                    </h4>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <h4 style="font-family:Arial"><span style="font-family:Bahnschrift;font-size:larger;color:darkslateblue">Selected Slot: </span>
+                    @Html.DropDownListFor(model => model.AllAppointment.Slots, (IEnumerable<SelectListItem>)ViewBag.Slots, "Select Slot", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.AllAppointment.Slots, "", new { @class = "text-danger" })
+                    </h4>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-1 col-md-11">
+                    <input type="submit" value="Save" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "MyAppointments")
+    </div>
+</body>

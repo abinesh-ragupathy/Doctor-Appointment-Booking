@@ -1,0 +1,79 @@
+﻿
+@model DoctorAppointmentBooking.Models.DoctorAndNetUsers
+
+@{
+    ViewBag.Title = "Schedule an Appointment";
+}
+<html>
+<head>
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    @*<style>
+        body {
+            background-color: aliceblue;
+        }
+    </style>*@
+</head>
+<body>
+    <h2 style="font-family:cursive;color:firebrick">@ViewBag.Title.</h2>
+    <h3 style="font-family:cursive;color:blueviolet">Details of Your Doctor</h3>
+    <div>
+        <div class="jumbotron">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="@Url.Content(Model.Doctor.DocImagePath)" alt="Doctor Info" style="width:300px;height:300px;">
+                    <br /> <br /> <br />
+                    <h4 style="color:blue">*In <span style="color:red">Emergencies</span> doctor can cancel appointments</h4>
+                    <h4 style="color:blue">*Pre-Register upto 3 months</h4>
+                    <h4 style="color:blue">*Date & Slot fields are required</h4>
+                </div>
+                <div class="col-md-8">
+                    <p style="font-family:Arial"><span style="font-family:cursive;font-size:larger;color:darkslateblue">Name:</span> @Html.DisplayFor(modelItem => Model.Doctor.DocName)</p>
+                    <p style="font-family:Arial"><span style="font-family:cursive;font-size:larger;color:darkslateblue">Qualification:</span> @Html.DisplayFor(modelItem => Model.Doctor.DocQualification)</p>
+                    <p style="font-family:Arial"><span style="font-family:cursive;font-size:larger;color:darkslateblue">Speciality:</span> @Html.DisplayFor(modelItem => Model.Doctor.DocSpecialization)</p>
+                    <p style="font-family:Arial"><span style="font-family:cursive;font-size:larger;color:darkslateblue">Experience:</span> @Html.DisplayFor(modelItem => Model.Doctor.DocExperience) years</p>
+                    <p style="font-family:Arial"><span style="font-family:cursive;font-size:larger;color:darkslateblue">Languages Known:</span> @Html.DisplayFor(modelItem => Model.Doctor.DocKnownLanguage)</p>
+                    @section Scripts {
+                        @Scripts.Render("~/bundles/jqueryval")
+                        <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+                        <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+                        <script type="text/javascript">
+                            var date = new Date();
+                            var currentMonth = date.getMonth();
+                            var currentDate = date.getDate();
+                            var currentYear = date.getFullYear();
+
+                            $(function () {
+                                $(".date-picker").datepicker({
+                                    dateFormat: 'mm/dd/yy',
+                                    minDate: new Date(currentYear, currentMonth, currentDate),
+                                    maxDate: new Date(currentYear, currentMonth + 3, currentDate)
+                                });
+                            });
+                        </script>
+                    }
+                    @using (Html.BeginForm("ConfirmAppointment", "Home", FormMethod.Post))
+                    {
+                        @Html.HiddenFor(model=>model.Doctor.DocId)
+                        <div class="row">
+                            <div class="col-md-5">
+                                <p style="font-family:Arial"><span style="font-family:cursive;font-size:larger;color:darkslateblue">Pick the Date</span></p>
+                                <div>
+                                    @Html.EditorFor(model => model.AllAppointment.SlotDate,
+      new { htmlAttributes = new { @class = "form-control date-picker" } })
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <p style="font-family:Arial"><span style="font-family:cursive;font-size:larger;color:darkslateblue">Pick the Slot</span></p>
+                                <p class="para"> @Html.DropDownListFor(model => model.AllAppointment.Slots, (IEnumerable<SelectListItem>)ViewBag.Slots, "Select Slot", new { @class = "form-control" }) </p>
+                                <br /> <br /> <br />
+                            </div>
+                            <center><button type="submit" class="btn btn-success" style="margin-right:250px">Confirm Appointment</button></center>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "ConfirmAppointment";
+}
+
+@*<style>
+    body {
+        background-color: aliceblue;
+    }
+</style>*@
+
+@if (ViewBag.Message == "Slots not Available Now !")
+{
+    <div class="jumbotron text-center">
+        <h1 class="display-3">@ViewBag.Message</h1>
+        <p class="lead"><strong>Please check with other available slots / dates </strong> for booking appointments.</p>
+        <hr>
+        <p>
+            Having trouble?
+            @Html.ActionLink("Contact us", "Contact", "Home", null)
+        </p>
+        <p>
+            @Html.ActionLink("Go Back", "BookAppointment", "Home", null, new { @class = "btn btn-danger" })
+        </p>
+        <br /> <br />
+    </div>
+}
+else if(ViewBag.Message == "Appointment Cancelled !")
+{
+    <div class="jumbotron text-center">
+        <h1 class="display-3">@ViewBag.Message</h1>
+        <p class="lead"><strong>Browse more </strong> for further information and appointments.</p>
+        <hr>
+        <p>
+            Having trouble?
+            @Html.ActionLink("Contact us", "Contact", "Home", null)
+        </p>
+        <p>
+            @Html.ActionLink("Go to Home", "Index", "Home", null, new { @class = "btn btn-success" })
+        </p>
+        <br /> <br />
+    </div>
+}
+else
+{
+<div class="jumbotron text-center">
+    <h1 class="display-3">@ViewBag.Message</h1>
+    <p class="lead"><strong>Please check your appointment </strong> for further instructions and modifications.</p>
+    <hr>
+    <p>
+        Having trouble?
+        @Html.ActionLink("Contact us", "Contact", "Home", null)
+    </p>
+    <p>
+        @Html.ActionLink("Go to My Appointments", "MyAppointments", "Home", null, new { @class = "btn btn-success" })
+    </p>
+    <br /> <br />
+</div>
+}

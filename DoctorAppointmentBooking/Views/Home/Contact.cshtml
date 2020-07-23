@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+
+<style>
+    /*body {
+        background-color: aliceblue;
+    }*/
+
+    .circular--square {
+        border-top-left-radius: 40% 40%;
+        border-top-right-radius: 40% 40%;
+        border-bottom-right-radius: 50% 50%;
+        border-bottom-left-radius: 50% 50%;
+    }
+</style>
+
+<h2 style="font-family:cursive;color:firebrick">@ViewBag.Title.</h2>
+
+<h3 style="font-family:'Segoe UI';color:darkslateblue"> Technical Team:</h3>
+<div>
+    <div class="row">
+
+            <center>
+                <img class="circular--square" src="~/images/ab.png" alt="developer" style="width:300px;height:300px;">
+                <h2 style="font-family:'Lucida Calligraphy';color:crimson">Abinesh R</h2>
+                <h3 style="font-family:'Comic Sans MS'"> < Developer /> </h3>
+                <h4> <a href="mailto:abinesh_r@hcl.com">abinesh_r@hcl.com</a></h4>
+            </center>
+   
+    </div>
+</div>
+
+<h3 style="font-family:'Segoe UI';color:darkslateblue"> Head Office:</h3>
+<address style="font-size:large;font-family:'Bodoni MT'">
+    HCL Health Care<br />
+    Elcot Sez,<br />
+    Sholinganallur, Chennai, Tamil Nadu<br />
+    <abbr title="Phone">P:</abbr>
+    269571 <br />
+    <strong>Support:</strong>   <a href="mailto:support@hclhealthcare.com">support@hclhealthcare.com</a><br />
+    <strong>Feedback:</strong> <a href="mailto:feedback@hclhealthcare.com">feedback@hclhealthcare.com</a>
+</address>
+

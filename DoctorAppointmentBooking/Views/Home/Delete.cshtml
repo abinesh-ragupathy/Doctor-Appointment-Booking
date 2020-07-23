@@ -1,0 +1,70 @@
+﻿@model DoctorAppointmentBooking.Models.DoctorAndNetUsers
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+</head>
+@*<style>
+    body {
+        background-color: aliceblue;
+    }
+</style>*@
+<body>
+    <h2 style="font-family:cursive;color:firebrick">Delete Appointment.</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.AllAppointment.AptId)
+            @Html.HiddenFor(model => model.Doctor.DocId)
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <h4 style="font-family:Arial"><span style="font-family:Bahnschrift;font-size:larger;color:darkslateblue">Doctor Name: </span>
+                    @Html.DisplayFor(model => model.Doctor.DocName, new { htmlAttributes = new { @class = "form-control" } })
+                    </h4>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <h4 style="font-family:Arial"><span style="font-family:Bahnschrift;font-size:larger;color:darkslateblue">Specialization: </span>                    
+                    @Html.DisplayFor(model => model.Doctor.DocSpecialization, new { htmlAttributes = new { @class = "form-control" } })
+                    </h4>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <h4 style="font-family:Arial"><span style="font-family:Bahnschrift;font-size:larger;color:darkslateblue">Appointment Date: </span>                    
+                    @Html.DisplayFor(model => model.AllAppointment.SlotDate, new { htmlAttributes = new { @class = "form-control" } })
+                    </h4>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <h4 style="font-family:Arial"><span style="font-family:Bahnschrift;font-size:larger;color:darkslateblue">Selected Slot: </span>                    
+                    @Html.DisplayFor(model => model.AllAppointment.Slots, new { htmlAttributes = new { @class = "form-control" } })
+                    </h4>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-1 col-md-11">
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "MyAppointments")
+    </div>
+</body>

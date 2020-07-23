@@ -1,0 +1,52 @@
+﻿@model IEnumerable<DoctorAppointmentBooking.Models.Doctor>
+
+@{
+    ViewBag.Title = "Best Doctors";
+}
+@*<style>
+    body {
+        background-color: aliceblue;
+    }
+</style>*@
+<html>
+<body>
+    @if (!Model.Any())
+    {
+        <div class="text-center">
+            <br /> <br />
+            <img src="~/images/noDoctors1.png" alt="No Doctor Found" style="width:80%;height:400px;">
+            <br />
+            <p class="lead"><strong>Sorry, </strong> no matching doctors found.</p>
+            <p>
+                @Html.ActionLink("Go Back", "BookAppointment", "Home", null, new { @class = "btn btn-danger" })
+            </p>
+        </div>
+    }
+    else
+    {
+        <h2 style="font-family:cursive;color:firebrick">@ViewBag.Title.</h2>
+        <div>
+            @foreach (var item in Model)
+            {
+                <div class="jumbotron">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img src="@Url.Content(item.DocImagePath)" alt="Doctor Info" style="width:200px;height:200px;">
+                        </div>
+                        <div class="col-md-9">
+                            <p style="font-family:Arial"><span style="font-family:cursive;font-size:larger;color:darkslateblue">Name:</span> @Html.DisplayFor(modelItem => item.DocName)</p>
+                            <p style="font-family:Arial"><span style="font-family:cursive;font-size:larger;color:darkslateblue">Qualification:</span> @Html.DisplayFor(modelItem => item.DocQualification)</p>
+                            @*<p style="font-family:Arial"><span style="font-family:cursive;font-size:larger;color:darkslateblue">Speciality:</span> @Html.DisplayFor(modelItem => item.DocSpecialization)</p>*@
+                            <p style="font-family:Arial"><span style="font-family:cursive;font-size:larger;color:darkslateblue">Experience:</span> @Html.DisplayFor(modelItem => item.DocExperience) years</p>
+                            @*<p style="font-family:Arial"><span style="font-family:cursive;font-size:larger;color:darkslateblue">Languages Known:</span> @Html.DisplayFor(modelItem => item.DocKnownLanguage)</p>*@
+                            <center>
+                                <button type="submit" class="btn btn-warning">@Html.ActionLink("Schedule Appointment", "Schedule", new { id = item.DocId })</button>
+                            </center>
+                        </div>                        
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</body>
+</html>

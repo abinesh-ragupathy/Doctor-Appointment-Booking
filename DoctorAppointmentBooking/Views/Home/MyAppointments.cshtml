@@ -1,0 +1,145 @@
+﻿@model IEnumerable<DoctorAppointmentBooking.Models.AllAppointment>
+
+@{
+    /**/
+
+    ViewBag.Title = "MyAppointments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    table {
+        border-collapse:collapse;
+        border-spacing: 0;
+    }
+
+    th,
+    td {
+        padding: 10px 15px;
+        font-family:'Bookman Old Style';
+    }
+
+    thead {
+        background: #395870;
+        color: #fff;
+    }
+
+    /*tbody tr:nth-child(even) {
+        background: #f0f0f2;
+    }*/
+
+    /*body {
+        background-color: aliceblue;
+    }*/
+
+</style>
+<br />
+@if (!Model.Any())
+{
+    <div class="text-center">
+        <br />
+        <img src="~/images/notfound.png" alt="No Appointment Found" style="width:400px;height:300px;">
+        <br /> <br />
+        <p class="lead"><strong>Sorry, </strong> no appointments found.</p>
+        <p>
+            @Html.ActionLink("New Appointment", "BookAppointment", "Home", null, new { @class = "btn btn-info" })
+        </p>
+        <br /> <br />
+    </div>
+}
+else
+{
+    <h2 style="font-family:cursive;color:firebrick">My Appointments.</h2>
+    <br />
+    <p>
+        @Html.ActionLink("New Appointment", "BookAppointment", "Home", null, new { @class = "btn btn-primary" })
+    </p>
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="font-family:Bahnschrift">
+                    Doctor Name
+                </th>
+                <th style="font-family:Bahnschrift">
+                    Specialization
+                </th>
+                <th style="font-family:Bahnschrift">
+                    Branch
+                </th>
+                <th style="font-family:Bahnschrift">
+                    City
+                </th>
+                <th style="font-family:Bahnschrift">
+                    Appointment Date
+                </th>
+                <th style="font-family:Bahnschrift">
+                    Selected Slot
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Doctor.DocName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Doctor.DocSpecialization)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Doctor.DocBranch)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Doctor.DocCity)
+            </td>
+
+            @if (item.DrAvailability == "no")
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.SlotDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Slots)
+                </td>
+                <td style="color:red">
+                    Appointment Cancelled by Doctor
+                </td>
+            }
+            else
+            {
+                if (item.SlotDate < Convert.ToDateTime(DateTime.Today))
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SlotDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Slots)
+                    </td>
+                    <td style="color:green">
+                        Appointment Completed
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SlotDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Slots)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.AptId, dId = item.DoctorId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.AptId, dId = item.DoctorId })
+                    </td>
+                }
+            }
+
+        </tr>
+        }
+
+    </table>
+}
+
